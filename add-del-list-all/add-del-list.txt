@@ -1,0 +1,47 @@
+touch userutility.sh; chmod +x userutility.sh; vim userutility.sh
+#!/bin/bash
+#This script to Adding, Deleting or List last 10 users 
+echo -e "Welcome to user utility \n"
+echo "1-Add User"
+echo "2-Delete User"
+echo "3-List last 10 Users"
+echo "Please Enter Your Choice( 1, 2, or 3 )"
+read choice
+echo "You Enterd $choice "
+if [ $choice -eq 1 ] ; then 
+	#echo "select option 1 "
+	#This script to add new user                                                     
+	echo "Please Enter New User Name To Add"                                                    
+	read username                                                                    
+	grep -w "^$username" /etc/passwd > /dev/null                                     
+	if [ $? -eq 0 ]                                                                  
+	then                                                                             
+		echo "The User $username is exist!"                                            
+	else                                                                             
+		echo "Please Enter Password"                                                     
+		read -s password                                                                 
+  		newpassword=$(echo "$password" | openssl passwd -1 -stdin)                       
+ 		sudo useradd -md /home/"$username" $username -p $newpassword                     
+  		echo "Congrats User $username Added Sucsess!"                                    
+	fi	
+
+elif [ $choice -eq 2 ] ; then
+	#echo "select option 2 "
+	#This script to delete user                                                     
+	echo "Please Enter User Name To Delete"                                                    
+	read username                                                                    
+	grep -w "^$username" /etc/passwd > /dev/null                                     
+	if [ $? -eq 0 ]                                                                  
+	then                                  
+		sudo userdel -r $username 2>/dev/null                                        
+		echo "The User $username is Deleted!"                                            
+	else  
+		echo "User $username Not Exist! "    
+	fi
+
+elif [ $choice -eq 3 ] ; then
+	#echo "select option 3 "
+	tail -10 /etc/passwd | cut -f1 -d':'
+else 
+	echo " Please Select valid Option"
+fi

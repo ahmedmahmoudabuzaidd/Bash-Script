@@ -1,0 +1,35 @@
+touch userutility.1 ; chmod 755 userutility.1 ; vim userutility.1 
+.TH USERUTILITY 1 "September 2025" "1.0" "User Management Utility"
+.SH NAME
+userutility \- manage users (add, delete, edit) with a simple menu
+.SH SYNOPSIS
+.B userutility
+.RI [ options ]
+.SH DESCRIPTION
+The
+.B userutility
+tool provides a menu-driven interface to add, delete, and modify users.
+
+.SH OPTIONS
+.TP
+.B --help
+Show a help message and exit.
+.TP
+.B --version
+Show the version number and exit.
+
+.SH FEATURES
+- Add new users
+- Delete existing users
+- Edit existing users:
+  * Change/move home directory
+  * Set account expiration date
+  * Change primary group
+  * Append secondary group
+
+.SH AUTHOR
+Written by Eng. Ahmed Abuzaid.
+=================================================
+cp userutility.1  /usr/share/man/man1/
+sudo mandb
+man userutility 

@@ -1,0 +1,70 @@
+#!/bin/bash
+# this script/function to edit 4 items in user account 
+function useredit_script {
+    echo "Please Enter User Name To Edit"
+    read username
+
+    if id "$username" &>/dev/null; then
+        echo "1- Change/Move Home Directory"
+        echo "2- Set Expire Date"
+        echo "3- Change Primary Group"
+        echo "4- Append Sub Group"
+        echo "5- Delete Sub Group"
+        read -p "Choose an option: " opt
+
+        case $opt in
+            1)
+                echo "Enter new home directory path:"
+                read new_home
+                if  [ -d "$new_home" ] ; then
+			sudo usermod -d "$new_home" -m "$username"
+		fi
+                echo "Home directory changed to $new_home"
+                ;;
+            2)
+                echo "Enter new expiry date (YYYY-MM-DD):"
+                read expire_date
+                sudo chage -E "$expire_date" "$username"
+                echo "Account expiry date set to $expire_date"
+                ;;
+            3)
+                echo "Enter new primary group:"
+                read new_group
+                if ! grep -q "^$new_group:" /etc/group; then
+                    sudo groupadd "$new_group"
+                fi
+                sudo usermod -g "$new_group" "$username"
+                echo "Primary group changed to $new_group"
+                ;;
+            4)
+                echo "Enter secondary group to append:"
+                read sub_group
+                if ! grep -q "^$sub_group:" /etc/group; then
+                    sudo groupadd "$sub_group"
+                fi
+                sudo usermod -aG "$sub_group" "$username"
+                echo "User $username added to $sub_group"
+                ;;
+            5)
+                echo "Enter secondary group to delete:"
+                read sub_group
+                if ! grep -q "^$sub_group:" /etc/group; then
+                    echo "group not exist"
+                fi
+                sudo gpasswd -d $username $sub_group
+                echo "User $username deleted from $sub_group"
+                ;;
+
+            *) echo "Invalid option!" ;;
+        esac
+    else
+        echo "User $username does not exist!"
+    fi
+}
+
+
+#Items To Edit :
+#-m -d change/move home directory  
+#-e expiration date for the account   sudo usermod -e 2025-12-31 ahmed , sudo chage -E 2025-12-31 ahmed
+#-g change primary group 
+#-aG add secondry group

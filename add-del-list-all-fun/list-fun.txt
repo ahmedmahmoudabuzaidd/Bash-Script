@@ -1,0 +1,4 @@
+touch list_users_scrip.sh ; chmod +x list_users_scrip.sh ; vim list_users_scrip.sh
+function list_users_script {
+#This script to list last 10 users
+tail -10 /etc/passwd | cut -f1 -d':' ;}

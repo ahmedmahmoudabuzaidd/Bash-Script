@@ -1,0 +1,27 @@
+touch userutility.sh ; chmod +x userutility.sh ; vim userutility.sh 
+#!/bin/bash
+#This is user utility tool to Adding, Deleting or List last 10 users 
+#
+#Author : Eng. Ahmed Abuzaid 
+
+########################### Functions ###########################
+source /home/laborant/adduser_script.sh	# script path and name 
+source /home/laborant/userdel_script.sh	# script path and name 
+source /home/laborant/list_users_scrip.sh # script path and name 
+########################### Functions ###########################                
+echo -e "Welcome to user utility \n"
+echo "1-Add User"
+echo "2-Delete User"
+echo "3-List last 10 Users"
+echo "Please Enter Your Choice( 1, 2, or 3 )"
+read choice
+echo "You Enterd $choice "
+if [ $choice -eq 1 ] ; then 
+    adduser_script  # function name inside the file 'adduser_script.sh'
+elif [ $choice -eq 2 ] ; then 
+    userdel_script  # function name inside the file 'userdel_script.sh'
+elif [ $choice -eq 3 ] ; then
+    list_users_script  # function name inside the file 'list_users_scrip.sh'
+else 
+    echo "Please Enter a Valid Choice "
+fi

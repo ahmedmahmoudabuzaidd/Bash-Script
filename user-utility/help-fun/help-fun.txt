@@ -1,0 +1,32 @@
+#!/bin/bash
+# Help Function/script
+function help_script {
+    cat << EOF
+================= USER UTILITY TOOL HELP =================
+This utility helps manage system users.
+
+Usage:
+    ./userutility4 [OPTION]
+
+Menu Options:
+    Add_User     - Create a new user and set a password
+    Delete_User  - Remove an existing user and home directory
+    Edit         - Modify an existing user with options:
+                   1) Change/move home directory
+                   2) Set account expire date
+                   3) Change primary group
+                   4) Append secondary group
+    Help         - Show this help message
+    Quit         - Quit the utility
+
+Command Line Options:
+    --help       Show this help message
+    --version    Show script version
+
+Notes:
+    - Run with sudo privileges.
+    - User passwords are stored securely with OpenSSL hashing.
+
+===========================================================
+EOF
+}

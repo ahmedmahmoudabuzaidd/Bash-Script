@@ -1,0 +1,15 @@
+#!/bin/bash                                                                                                                                                                                     
+#This script to add new user                                                     
+echo "Please Enter New User Name"                                                    
+read username                                                                    
+grep -w "^$username" /etc/passwd > /dev/null                                     
+if [ $? -eq 0 ]                                                                  
+then                                                                             
+	echo "The User $username is Exist!"                                            
+else                                                                             
+	echo "Please Enter Password"                                                     
+	read -s password                                                                 
+  	newpassword=$(echo "$password" | openssl passwd -1 -stdin)                       
+ 	sudo useradd -md /home/"$username" $username -p $newpassword                     
+  	echo "Congrats User $username Added Sucsess!"                                    
+fi

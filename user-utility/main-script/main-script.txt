@@ -1,0 +1,24 @@
+#!/bin/bash
+#User Utility Function 
+#This is User Utility Tool To Adding, Deleting or Modify Users
+#Author : Eng. Ahmed Abuzaid
+########################### Functions ###########################
+source /home/ahmed/add_fun   # Make sure this scripting is under thes Directories 
+source /home/ahmed/del_fun
+source /home/ahmed/edit_fun
+########################### Functions ##########################
+
+echo -e "Welcome to user utility !"
+
+
+select choice in "Add_User" "Delete_User" "Edit" "Quit" "Help"
+do
+case $choice in
+        Add_User)       adduser_script ;;
+        Delete_User)    userdel_script ;;
+        Edit)   useredit_script ;;
+        Quit)  break ;;
+	Help )  help_script ;;
+        *)      echo "Enter a valid Choice!" ;;
+esac
+done

@@ -1,0 +1,13 @@
+#!/bin/bash                                                                                                                                                                                     
+#This script to delete user                                                     
+echo "Please Enter User Name To Delete"                                                    
+read username                                                                    
+grep -w "^$username" /etc/passwd > /dev/null                                     
+if [ $? -eq 0 ]                                                                  
+then                                  
+	sudo userdel -r $username 2>/dev/null                                        
+	echo "The User $username is Deleted"                                            
+else  
+	echo "User $username Not Exist! "    
+fi
+
