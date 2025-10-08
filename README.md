@@ -1,6 +1,6 @@
 # Bash-Script is powerfull tool, it has a lot of advantages
-⚙️ 1. Automation 
-    Using Bash scripts automate repetitive tasks.
+⚙️ 1. Automation "\n"
+    Using Bash scripts automate repetitive tasks."\n"
 🔁 2. Repeatability
     You can share a single script and ensure everyone runs the exact same steps.
 🔐 3. Integration
